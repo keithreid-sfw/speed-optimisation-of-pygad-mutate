@@ -37,7 +37,7 @@ int main()
     }
 
 
-    printf("\nEnter a second matriux and htrow a mutation in manually every so often: \n\n");
+    printf("\nEnter a second matrix and throw a mutation in manually every so often: \n\n");
 
     for(i = 0; i < ROW; i++)
     {
