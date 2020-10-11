@@ -87,3 +87,95 @@ int main()
     // signal to operating system program ran fine
     return 0;
 }
+
+
+
+=======
+    
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+/* generate adn return random ints*/
+int * get_rand_ints()
+{
+    static int arr[10];
+    int i;
+
+    /* set the seed */
+    srand ((unsigned)time(NULL));
+    for (i=0; i<10; ++i)
+    {
+        arr[i] = rand();
+    }
+    return arr;
+}
+
+/* generate adn return random floats*/
+float * get_rand_floats()
+{
+    static float arr[10];
+    int i;
+
+    /* set the seed */
+    srand ((unsigned)time(NULL));
+    for (i=0; i<10; ++i)
+    {
+        arr[i] = 100000000.0/rand();
+    }
+    return arr;
+}
+
+
+/* generate and return zeroes except one*/
+int * get_zeroes_except_one()
+{
+    static int arr[10];
+    int i;
+
+    /* set the seed */
+    /*srand ((unsigned)time(NULL));*/
+    for (i=0; i<10; ++i)
+    {
+        if (i == 3) {
+            arr[i] = 1;
+        }
+        else {
+            arr[i] = 0;
+        }
+    }
+
+    return arr;
+}
+
+
+/* main to call above */
+int main()
+
+{
+     /* arrays that might be useful */
+     int  *pointer_arr_ints;
+     float *pointer_arr_floats;
+     int  *pointer_arr_zeros_except_one;
+
+
+     int   i;
+
+     pointer_arr_ints             = get_rand_ints();
+     pointer_arr_floats             = get_rand_floats();
+     pointer_arr_zeros_except_one = get_zeroes_except_one();
+
+     for (i=0; i<10; i++)
+     {
+         printf("\n%5d", *(pointer_arr_ints + i));
+
+         printf("\n%5f", *(pointer_arr_floats + i));
+
+         printf("\n%5d", *(pointer_arr_zeros_except_one + i));
+     }
+
+     return 0;
+}
+    
+    
+    
