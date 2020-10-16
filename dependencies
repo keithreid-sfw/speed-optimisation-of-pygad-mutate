@@ -1,2 +1,8 @@
 gcc compiler
 C
+python
+
+python libraries:
+
+base:      random, ctypes
+non base:  numpy, scipy
