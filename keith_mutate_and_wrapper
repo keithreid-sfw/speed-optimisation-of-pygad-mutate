@@ -2,46 +2,82 @@
 #include<stdlib.h>
 #include<time.h>
 
-float get_small_float()
+// MODEL
+
+double get_small_float()
 {
-float small_float;
+double small_float;
     {
-    small_float = (float)rand()/RAND_MAX;
+    small_float = (double)rand()/RAND_MAX;
     }
     return small_float;
 }
 
-int keith_mutate()
+int keith_mutate(p)
 {
-    printf("\ncalled keith mutate\n");
+    printf("\n\ncalled keith mutate and do something with pointer\n");
     return 0;
 }
 
+// VIEW
+
+void tell_population(double *p)
+{
+int i;
+
+    printf("\n\nPrint the population from function\n");
+    for(i = 0; i < 7; i++)
+        {
+        printf("%5f ", *(p+i));
+        }
+
+}
+
+
+
+// CONTROL
+
+
+
 int main()
 {
-    int i, j;
+    // primary declarations
+    int i;
     int length_flat_population;
     int number_of_mutations;
+    double *p;
 
+    // primary definitions
     length_flat_population = 7;
-    number_of_mutations =2;
+    number_of_mutations    = 2;
 
-    float flat_population[length_flat_population];
+    // secondary declarations
+    double flat_population[length_flat_population];
 
-    printf("\nBuild a fake flat population in main - backstage no output");
+    printf("\n\nBuild a fake flat population in main - backstage no output\n");
     for(i = 0; i < length_flat_population; i++)
         {
         flat_population[i] = get_small_float();
         }
 
-    printf("\nPrint the population from main\n");
-    for(i = 0; i < length_flat_population; i++)
+    printf("\n\nPrint the population in main scope using dynamic element reference in main scope\n");
+    for(i = 0; i < 7; i++)
         {
         printf("%5f ", flat_population[i]);
         }
 
-    keith_mutate();
+    p = flat_population;
 
+    printf("\n\nprint value = referencing pointer *p in main scope\t%5f", *p);
+
+    printf("\n\nPrint the population in main scope using pointer\n");
+    for(i = 0; i < 7; i++)
+        {
+        printf("%5f ", *(p+i));
+        }
+
+    tell_population(p);
+    keith_mutate();
     return 0;
 }
 
