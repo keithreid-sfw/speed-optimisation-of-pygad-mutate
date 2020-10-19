@@ -4,216 +4,92 @@
 
 // MODEL
 
-double get_small_float()
+double get_mutation(int min_mutation, int max_mutation)
 {
-double small_float;
+// secondary declaration and definition
+int gap = max_mutation - min_mutation;
+
+double mutation;
     {
-    small_float = (double)rand()/RAND_MAX;
+    mutation = min_mutation + gap*(double)rand()/RAND_MAX;
     }
-    return small_float;
+    return mutation;
 }
 
-int keith_mutate(p)
+int keith_mutate(double *p, int min_mutation, int max_mutation, int length_flat_population, int number_of_mutations)
 {
-    printf("\n\ncalled keith mutate and do something with pointer\n");
+    // primary declarations
+    int    i;
+    int    random_index;
+    double candidate_gene;
+    double mutation;
+
+    // secondary declarations
+    int mutation_index_stack[number_of_mutations];
+
+    // initialise seed here not inside loops
+    srand(time(NULL));
+
+    // make a stack of random indexes
+    for (i = 0; i < number_of_mutations; ++i)
+    {
+        random_index = length_flat_population * (double)rand()/RAND_MAX;
+        mutation_index_stack[i] = random_index;
+    }
+    // use the pointer and each index to reference and then change genes in memory
+    for(i = 0; i < number_of_mutations; i++)
+        {
+        candidate_gene = *(p + mutation_index_stack[i]);
+        mutation = get_mutation(min_mutation, max_mutation);
+        candidate_gene += mutation;
+        *(p + mutation_index_stack[i]) = candidate_gene;
+    }
     return 0;
 }
 
 // VIEW
 
-void tell_population(double *p)
+void tell_population(double *p, int length_flat_population)
 {
 int i;
-
-    printf("\n\nPrint the population from function\n");
-    for(i = 0; i < 7; i++)
+    printf("\n\nPopulation\n");
+    for(i = 0; i < length_flat_population; i++)
         {
         printf("%5f ", *(p+i));
         }
-
 }
 
-
-
 // CONTROL
-
-
 
 int main()
 {
     // primary declarations
     int i;
     int length_flat_population;
+    int max_mutation;
+    int min_mutation;
     int number_of_mutations;
     double *p;
 
     // primary definitions
-    length_flat_population = 7;
-    number_of_mutations    = 2;
+    length_flat_population =  10;
+    number_of_mutations    =  5;
+    min_mutation           = -1;
+    max_mutation           =  1;
 
     // secondary declarations
     double flat_population[length_flat_population];
 
-    printf("\n\nBuild a fake flat population in main - backstage no output\n");
+    // Build a fake flat population in main
     for(i = 0; i < length_flat_population; i++)
         {
-        flat_population[i] = get_small_float();
+        flat_population[i] = get_mutation(min_mutation, max_mutation);
         }
 
-    printf("\n\nPrint the population in main scope using dynamic element reference in main scope\n");
-    for(i = 0; i < 7; i++)
-        {
-        printf("%5f ", flat_population[i]);
-        }
-
+    // assign a pointer to be passed to keith_mutate
     p = flat_population;
-
-    printf("\n\nprint value = referencing pointer *p in main scope\t%5f", *p);
-
-    printf("\n\nPrint the population in main scope using pointer\n");
-    for(i = 0; i < 7; i++)
-        {
-        printf("%5f ", *(p+i));
-        }
-
-    tell_population(p);
-    keith_mutate();
+    tell_population(p, length_flat_population);
+    keith_mutate(p, min_mutation, max_mutation, length_flat_population, number_of_mutations); // acts in memory using pointer so is void return
+    tell_population(p, length_flat_population);
     return 0;
 }
-
-//* generate and return random ints*/
-//int * get_rand_ints()
-//{
-//    static int arr[8];
-//    int i;
-//
-//   /* set the seed */
-//    srand ((unsigned)time(NULL));
-//    for (i=0; i<8; ++i)
-//    {
-//        arr[i] = rand();
-//    }
-//    return arr;
-//}
-
-//* generate and return random floats*/
-//float * get_rand_floats()/
-//{
-//    static float arr[8];
-//    int i;
-//
-//    /* set the seed */
-//    srand ((unsigned)time(NULL));
-//    for (i=0; i<8; ++i)
-//    {
-//        arr[i] = 100000000.0/rand();
-//    }
-//   return arr;
-//}
-
-
-//* generate and return zeroes except one*/
-//int * get_zeroes_except_one()
-//{
-//   static int arr[8];
-//    int i;
-//
-//    /* set the seed */
-//    /*srand ((unsigned)time(NULL));*/
-//    for (i=0; i<8; ++i)
-//    {
-//        if (i == 3) {
-//           arr[i] = 1;
-//        }
-//       else {
-//            arr[i] = 0;
-//        }
-//    }
-//
-//    return arr;
-//}
-
-    // function to change an element by function
-
-
-
-    //int i,j; // iterator and jiterator
-    //double algo[10][2] = {{0.1,  1.2,  2.3,  3.4,  4.5,  5.6,  6.7,  7.8,  8.9,  9.0},
-     //                   { 10.1, 11.2, 12.3, 13.4, 14.5, 15.6, 16.7, 17.8, 18.9, 19.0}}; // genetic algorithm
-    //int *p; // gene pointer p declared as an int of pointer type needing memory later as in * we will refer to this
-
-    //p = &algo[0][0]; // assign q the numerical value of the starting point with & "... AAaaaannnndd it starts here"
-
-    //for (i=0; i<2; ++i)
-    //{   printf("\niterator:\t%d", i);
-    //    for (j=0; j<10; ++j)
-     //   printf("\njiterator:\t%d", j);
-     //   {
-     //       printf("\n%5f\n", *p);      // the literal value got by referring to the pointer
-     //   }
-    //}
-
-
-    //float mat1[8][4], mat2[8][4], mat3[8][4];
-
-    /* arrays that might be useful */
-    //int   *pointer_arr_ints;
-    //float *pointer_arr_floats;
-    //int   *pointer_arr_zeros_except_one;
-
-    //pointer_arr_ints             = get_rand_ints();
-    //pointer_arr_floats           = get_rand_floats();
-    //pointer_arr_zeros_except_one = get_zeroes_except_one();
-
-    //for (i=0; i<10; i++)
-    //{
-       //  printf("\n%5d", *(pointer_arr_ints + i));
-       //  printf("\n%5f", *(pointer_arr_floats + i));
-       //  printf("\n%5d", *(pointer_arr_zeros_except_one + i));
-    //}
-
-
-
-    //printf("\nEnter a second matrix and throw a mutation in manually every so often: \n\n");
-    //for(i = 0; i < 8; i++)
-    //{
-        //for(j = 0; j < 4; j++)
-        //{
-        //    printf("Enter a[%d][%d]: ", i, j);
-        //    scanf("%f", &mat2[i][j]);
-    //    }
-    //}
-
-    //printf("\n");
-    //for(i = 0; i < 8; i++)
-    //{
-       // for(j = 0; j < 4; j++)
-       // {
-       //     printf("%5f ", mat2[i][j]);
-        //}
-       // printf("\n");
-    //}
-
-
-    //printf("\n");
-    // add mat1 and mat2
-    //for(i = 0; i < 8; i++)
-    //{
-       // for(j = 0; j < 4; j++)
-       // {
-       //     mat3[i][j] = mat1[i][j] + mat2[i][j];
-      //  }
-    //}
-
-    //printf("\nResultant array: \n\n");
-    // print resultant array
-    //for(i = 0; i < 8; i++)
-    //{
-        //for(j = 0; j < 4; j++)
-        //{
-            //printf("%5f ", mat3[i][j]);
-       // }
-       // printf("\n");
-    //}
-
-    // signal to operating system program ran fine
