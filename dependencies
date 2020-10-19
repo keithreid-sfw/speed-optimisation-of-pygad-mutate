@@ -6,3 +6,6 @@ python libraries:
 
 base:      random, ctypes
 non base:  numpy, scipy
+
+C code written on codeblocks
+Python 3.8 or 3.9 written on Ubuntu, Arch linux distros
