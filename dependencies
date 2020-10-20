@@ -9,3 +9,22 @@ non base:  numpy, scipy
 
 C code written on codeblocks
 Python 3.8 or 3.9 written on Ubuntu, Arch linux distros
+
+compilation advice
+this is more or less repeated in the python code
+
+# treat this as a library call and put it here
+
+# in Linux:
+
+#     precompile with bash script
+#     then run ldconfig
+
+#     if your computer has issues you may need to reconfgure the PATH used to find libraries
+
+# <my_computer/Projects/Machine_Learning$>>> $ gcc -fPIC -shared -o keith_functions.so keith_module.c
+# <my_computer/Projects/Machine_Learning$>>> $ sudo ldconfig -v
+
+# note that printf
+# when called from keith_mutate over in C land
+# prints out to the terminal you are using to run your IDE, not to the notebook here
