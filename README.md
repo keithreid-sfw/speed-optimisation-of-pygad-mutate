@@ -1,4 +1,5 @@
-# props_to_pygad
+speed optimisation of pygad mutate
+
 A head to head comparison of four mutate methods for an ndarray and back again.
 
  - base library
