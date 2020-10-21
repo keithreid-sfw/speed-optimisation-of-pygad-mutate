@@ -16,7 +16,7 @@ double mutation;
     return mutation;
 }
 
-int keith_mutate(double *p, int min_mutation, int max_mutation, int length_flat_population, int number_of_mutations)
+double *keith_mutate(double *p, int min_mutation, int max_mutation, int length_flat_population, int number_of_mutations)
 {
 
     // log incoming args
@@ -69,7 +69,7 @@ int keith_mutate(double *p, int min_mutation, int max_mutation, int length_flat_
         printf("%5f ", *(p+i));
         }
     printf("\nif that was blank it didnt work");
-    return 0;
+    return p;
 }
 
 // VIEW
