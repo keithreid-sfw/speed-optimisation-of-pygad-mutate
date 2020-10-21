@@ -1,7 +1,10 @@
 # props_to_pygad
+A head to head comparison of four mutate methods for an ndarray and back again.
 
-me trying to optmise little bits of the already very good pygad
-
-out of respect and in order to learn
-
-and to make my own similar projects work faster
+ - base library
+ - keith_mutate my bespoke C implementation in a ctypes callable shared library
+ - pygad's existing mutate function
+ - aggressive vectorisation of the pygad function (my own previous approach in my own dev project)
+ 
+ The four approaches do not separate at my use case, but increasing the computational demand shows small differences which could be important in large projects.
+ Results are in the code.
