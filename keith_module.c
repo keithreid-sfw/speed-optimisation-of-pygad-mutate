@@ -21,13 +21,13 @@ double *keith_mutate(double *p, int min_mutation, int max_mutation, int length_f
 
     // log incoming args
 
-    printf("\n");
-    printf("%f\t",*p);
-    printf("%d\t",min_mutation);
-    printf("%d\t",max_mutation);
-    printf("%d\t",length_flat_population);
-    printf("%d\t",number_of_mutations);
-    printf("\n");
+    //printf("\n");
+    //printf("%f\t",*p);
+    //printf("%d\t",min_mutation);
+    //printf("%d\t",max_mutation);
+    //printf("%d\t",length_flat_population);
+    //printf("%d\t",number_of_mutations);
+    //printf("\n");
 
     // primary declarations
     int    i;
@@ -49,11 +49,11 @@ double *keith_mutate(double *p, int min_mutation, int max_mutation, int length_f
         mutation_index_stack[i] = random_index;
     }
 
-    printf("\n\nPopulation in keith_mutate before\n");
-    for(i = 0; i < length_flat_population; i++)
-        {
-        printf("%5f ", *(p+i));
-        }
+    //printf("\n\nPopulation in keith_mutate before\n");
+    //for(i = 0; i < length_flat_population; i++)
+    //    {
+    //     printf("%5f ", *(p+i));
+    //    }
     // use the pointer and each index to reference and then change genes in memory
     for(i = 0; i < number_of_mutations; i++)
         {
@@ -63,12 +63,12 @@ double *keith_mutate(double *p, int min_mutation, int max_mutation, int length_f
         *(p + mutation_index_stack[i]) = candidate_gene;
     }
 
-    printf("\n\nPopulation in keith mutate after\n");
-    for(i = 0; i < length_flat_population; i++)
-        {
-        printf("%5f ", *(p+i));
-        }
-    printf("\nif that was blank it didnt work");
+    //printf("\n\nPopulation in keith mutate after\n");
+    //for(i = 0; i < length_flat_population; i++)
+    //   {
+    //    printf("%5f ", *(p+i));
+    //    }
+    //printf("\nif that was blank it didnt work");
     return p;
 }
 
